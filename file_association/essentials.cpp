@@ -24,10 +24,6 @@ void ResetFile(QFile& file) {
 }
 
 QString CreateDomainName(QString filePath) {
-    if (!filePath.contains('/')) {
-        throw IncorrectPath("Exception has occured: incorrect service path!");
-    }
-
     if (filePath.at(0) == '/' || filePath.at(0) == '\\') {
         filePath = filePath.mid(1, filePath.size() - 1);
     }

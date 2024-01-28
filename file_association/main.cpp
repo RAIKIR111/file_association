@@ -5,6 +5,12 @@
 
 #define JSON_FILE_PATH "./data.json"
 
+void ValidatePath(const QString& path) {
+    if (!path.contains('/')) {
+        throw IncorrectPath("Exception has occured: incorrect service path!");
+    }
+}
+
 int main(int argc, char *argv[]) {
     QCoreApplication a(argc, argv);
 
@@ -71,6 +77,7 @@ int main(int argc, char *argv[]) {
         while (query_type != QueryType::Exit && query_type != QueryType::ERROR) {
             qtin >> main_str;
             if (query_type == QueryType::Add) {
+                ValidatePath(main_str);
                 QString file_path = QFileInfo(main_str).absoluteFilePath();
                 QString domain_name = CreateDomainName(file_path);
 
@@ -94,6 +101,7 @@ int main(int argc, char *argv[]) {
                 query_type = GetQueryType(main_str);
             }
             else if (query_type == QueryType::GetTypes) {
+                ValidatePath(main_str);
                 QString file_path = QFileInfo(main_str).absoluteFilePath();
                 QString domain_name = CreateDomainName(file_path);
 
@@ -165,6 +173,8 @@ int main(int argc, char *argv[]) {
 
     file.write(json_doc.toJson());
     file.close(); // file close
+
+    qDebug() << "All data has been saved!";
 
     if (adaptor) {
         delete adaptor;

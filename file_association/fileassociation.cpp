@@ -35,6 +35,9 @@ void FileAssociation::removeService(const QString& service_domain) {
         else {
             qDebug() << "Service UNREGISTERED with D-Bus:" << service_domain;
             service_to_types_.remove(service_domain);
+            for (auto it = type_to_services_.begin(); it != type_to_services_.end(); ++it) {
+                it.value().remove(service_domain);
+            }
             emit ServiceRemoved(service_domain);
         }
     }
@@ -70,14 +73,10 @@ QStringList FileAssociation::getServices() const {
 }
 
 QStringList FileAssociation::getServicesByType(const QString& type_name) const {
-    QStringList dst;
-    const QSet<QString> services = type_to_services_[type_name];
-    for (const auto& service : services) {
-        if (service_to_types_.count(service)) {
-            dst.append(service);
-        }
+    if (type_to_services_.count(type_name)) {
+        return {type_to_services_[type_name].begin(), type_to_services_[type_name].end()};
     }
-    return dst;
+    return {};
 }
 
 QMap<QString, QSet<QString>> FileAssociation::data() const {
