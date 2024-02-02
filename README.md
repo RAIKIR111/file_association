@@ -19,11 +19,11 @@ There is a demo version of the console application named "File Association" that
 qmake6, qdbus, g++, cmake, .deb
 
 Use following commands in terminal to install packages above:
-**sudo apt install build-essential**
-**sudo apt install cmake**
-**sudo apt install qmake6**
-**sudo apt install dpkg**
-**sudo apt install qdbus-qt5**
+1. **sudo apt install build-essential**
+2. **sudo apt install cmake**
+3. **sudo apt install qmake6**
+4. **sudo apt install dpkg**
+5. **sudo apt install qdbus-qt5**
 
 ## Deployment instructions
 
@@ -39,5 +39,5 @@ Use following commands in terminal to install packages above:
 3. In terminal **./file_association** to start the application (and get instuctions how to use it)
 
 To reproduce FA_Adaptor.cpp/.h and FA_Interface.cpp/.h use following commands in terminal:
-**qdbusxml2cpp fileassociation_necessaries.xml -a FA_Adaptor**
-**qdbusxml2cpp fileassociation_necessaries.xml -p FA_Interface**
+1. **qdbusxml2cpp fileassociation_necessaries.xml -a FA_Adaptor**
+2. **qdbusxml2cpp fileassociation_necessaries.xml -p FA_Interface**
