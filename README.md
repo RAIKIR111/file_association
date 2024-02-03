@@ -40,5 +40,5 @@ Use following commands in terminal to install packages above:
 3. In terminal **./file_association** to start the application (and get instuctions how to use it)
 
 If you want to reproduce FA_Adaptor.cpp/.h and FA_Interface.cpp/.h use following commands in terminal:
-**qdbusxml2cpp fileassociation_necessaries.xml -a FA_Adaptor**
-**qdbusxml2cpp fileassociation_necessaries.xml -p FA_Interface**
+1. **qdbusxml2cpp fileassociation_necessaries.xml -a FA_Adaptor**
+2. **qdbusxml2cpp fileassociation_necessaries.xml -p FA_Interface**
