@@ -22,9 +22,17 @@
 #include <QDBusArgument>
 #include <QVariant>
 
+#include <algorithm>
+
 #include "fileassociation.h"
 #include "FA_Adaptor.h"
 #include "FA_Interface.h"
+
+#define FA_SERVICE "file.association"
+#define FA_PATH "/demo"
+
+#define JSON_FILE_PATH_DEFAULT "./data.json"
+#define CONFIG_FILE_PATH_DEFAULT "./cfg.json"
 
 class IncorrectQueryType : public std::exception {
 public:
@@ -62,6 +70,27 @@ private:
     std::string error_message_;
 };
 
+class IncorrectFormat : public std::exception {
+public:
+    IncorrectFormat(const char* message) : error_message_(message) {}
+
+    const char* what() const noexcept override {
+        return error_message_.c_str();
+    }
+
+private:
+    std::string error_message_;
+};
+
+
+enum class CfgQueryType {
+    Register,
+    Unregister,
+    GetFormats,
+    UnregAll,
+    Exit
+};
+
 enum class QueryType {
     Exit,
     Add,
@@ -75,8 +104,11 @@ enum class QueryType {
 enum class RunType {
     DEFAULT,
     EXTENDED,
-    TEMPORARY
+    TEMPORARY,
+    CFG_MODE
 };
+
+CfgQueryType GetCfgQueryType(const QString& cfg_query);
 
 QueryType GetQueryType(const QString& query);
 
@@ -93,5 +125,19 @@ QJsonObject GetDataFromInterface(QDBusInterface& interface);
 void CreateJsonFile(QFile& file);
 
 void ValidatePath(const QString& path);
+
+QSet<QString> GetConfigurations();
+
+bool ValidateFileFormat(const QString& json_file_path);
+
+// scenaries
+
+int ConfigurationScenary();
+
+int DefaultScenary(QCoreApplication& a, const QString& json_file_path);
+
+int ExtendedScenary(QCoreApplication& a, const QString& json_file_path);
+
+int TemporaryScenary(QCoreApplication& a);
 
 #endif // ESSENTIALS_H
