@@ -20,11 +20,11 @@ There is a demo version of the console application named "File Association" that
 qmake6, qdbus, g++, cmake, .deb
 
 Use following commands in terminal to install packages above:
-**sudo apt install build-essential**
-**sudo apt install cmake**
-**sudo apt install qmake6**
-**sudo apt install dpkg**
-**sudo apt install qdbus-qt5**
+1. **sudo apt install build-essential**
+2. **sudo apt install cmake**
+3. **sudo apt install qmake6**
+4. **sudo apt install dpkg**
+5. **sudo apt install qdbus-qt5**
 
 ## Deployment instructions
 
