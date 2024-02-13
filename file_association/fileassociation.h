@@ -9,6 +9,7 @@
 #include <QDBusArgument>
 #include <QMetaType>
 #include <QDBusMetaType>
+#include <QDebug>
 
 class FileAssociation : public QObject
 {
